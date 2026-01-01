@@ -1,0 +1,22 @@
+.Button {
+  all: unset;
+  padding: 0.5em 0.4em;
+  font-size: inherit;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+
+  &:focus,
+  &:active {
+    scale: 0.975;
+  }
+
+  &.primary {
+    background-color: blue;
+  }
+
+  &.danger {
+    background-color: red;
+  }
+}

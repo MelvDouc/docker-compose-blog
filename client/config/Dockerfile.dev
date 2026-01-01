@@ -1,0 +1,4 @@
+FROM node:lts-alpine3.23
+
+WORKDIR /app
+CMD ["npm", "run", "dev", "--no-update-notifier"]

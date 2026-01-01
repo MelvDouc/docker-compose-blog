@@ -1,0 +1,22 @@
+# Build package first with dev dependencies included.
+FROM node:lts-alpine3.23 AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+# Copy build into a new container and install prod dependencies only.
+# The goal is to cache the various build steps.
+FROM node:lts-alpine3.23
+
+WORKDIR /app
+COPY --from=builder /app/dist/* ./
+
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+CMD ["npm", "start", "--no-update-notifier"]

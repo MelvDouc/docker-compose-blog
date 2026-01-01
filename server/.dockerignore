@@ -1,0 +1,7 @@
+.env
+.env.*
+.vscode
+
+dist
+docker
+node_modules
