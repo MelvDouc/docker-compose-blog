@@ -13,10 +13,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "$server/*": [
-        "./*"
+        "./src/*"
+      ],
+      "$common/*": [
+        "../common/*"
       ]
     }
   }

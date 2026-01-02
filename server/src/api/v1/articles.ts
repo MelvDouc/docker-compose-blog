@@ -21,7 +21,7 @@ articlesRouter.post("/", async (ctx) => {
   const errors = validateArticle(data);
 
   if (errors)
-    return ctx.json({ success: false, value: errors });
+    return ctx.json([null, errors]);
 
   const article = new Article();
   article.title = data.title;
@@ -29,8 +29,8 @@ articlesRouter.post("/", async (ctx) => {
   article.tags ??= [];
 
   const repo = AppDataSource.getRepository(Article);
-  const value = await repo.save(article);
-  return ctx.json({ success: true, value });
+  const savedArticle = await repo.save(article);
+  return ctx.json([savedArticle, null]);
 });
 
 articlesRouter.get("/@/:id", async (ctx) => {
@@ -43,10 +43,10 @@ articlesRouter.get("/@/:id", async (ctx) => {
   });
 
   if (!article)
-    return ctx.json({ success: false, value: "Article not found." });
+    return ctx.json([null, "Article not found."]);
 
   article.tags ??= [];
-  return ctx.json({ success: true, value: article });
+  return ctx.json([article, null]);
 });
 
 articlesRouter.patch("/@/:id", async (ctx) => {
@@ -61,14 +61,14 @@ articlesRouter.patch("/@/:id", async (ctx) => {
   const errors = validateArticle(data);
 
   if (errors)
-    return ctx.json({ success: false, value: errors });
+    return ctx.json([null, errors]);
 
   article.title = data.title;
   article.content = data.content;
   article.tags ??= [];
 
-  const value = await repo.save(article);
-  return ctx.json({ success: true, value });
+  const savedArticle = await repo.save(article);
+  return ctx.json([savedArticle, null]);
 });
 
 articlesRouter.delete("/@/:id", async (ctx) => {
@@ -78,8 +78,8 @@ articlesRouter.delete("/@/:id", async (ctx) => {
 
   return ctx.json(
     typeof affected === "number" && affected === 1
-      ? { success: true, value: null }
-      : { success: false, value: `Article with id ${id} could not be deleted.` }
+      ? [true, null]
+      : [null, `Article with id ${id} could not be deleted.`]
   );
 });
 
@@ -88,12 +88,12 @@ articlesRouter.get("/last", async (ctx) => {
   const lastId = await repo.maximum("id");
 
   if (lastId === null)
-    return ctx.json({ success: false, value: "Article not found." });
+    return ctx.json([null, "Article not found."]);
 
   const article = await repo.findOne({
     where: { id: lastId },
     relations: { tags: true }
   }) as Article;
   article.tags ??= [];
-  return ctx.json({ success: true, value: article });
+  return ctx.json([article, null]);
 });

@@ -12,8 +12,7 @@ declare global {
   }
 }
 
-export type Result<Data, Err> =
-  | { success: true; value: Data; }
-  | { success: false; value: Err; };
-
-export type AsyncResult<Data, Err> = Promise<Result<Data, Err>>;
+export type {
+  Result,
+  AsyncResult
+} from "$common/common-types.js";

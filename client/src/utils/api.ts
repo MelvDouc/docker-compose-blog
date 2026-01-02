@@ -32,7 +32,7 @@ export const getArticle = (id: number) => {
   return api<Result<WithId<Article>, string>>({
     path: `/articles/@/${id}`,
     method: "GET",
-    fallback: (error) => ({ success: false, value: String(error) })
+    fallback: (error) => [null, String(error)]
   });
 };
 
@@ -40,7 +40,7 @@ export const getLastArticle = () => {
   return api<Result<WithId<Article>, string>>({
     path: "/articles/last",
     method: "GET",
-    fallback: (error) => ({ success: false, value: String(error) })
+    fallback: (error) => [null, String(error)]
   });
 };
 
@@ -49,7 +49,7 @@ export const addArticle = (data: Article) => {
     path: "/articles",
     method: "POST",
     body: data,
-    fallback: () => ({ success: false, value: ["Error adding article."] })
+    fallback: () => [null, ["Error adding article."]]
   });
 };
 

@@ -13,13 +13,12 @@ export default function AddArticlePage() {
 }
 
 async function handleSubmit(article: Article): Promise<void> {
-  const result = await addArticle(article);
+  const [savedArticle, errors] = await addArticle(article);
 
-  if (!result.success) {
-    console.log({ error: result.value });
+  if (errors) {
+    console.log({ errors });
     return;
   }
 
-  const articleWithId = result.value;
-  navigate(`/articles?id=${articleWithId.id}`, articleWithId);
+  navigate(`/articles?id=${savedArticle.id}`, savedArticle);
 }

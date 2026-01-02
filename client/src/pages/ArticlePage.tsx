@@ -7,12 +7,10 @@ import { pageNotFound } from "reactfree-jsx/extra/router";
 export default async function ArticlePage({ id }: {
   id: string;
 }) {
-  const result = await getArticle(+id);
+  const [article, error] = await getArticle(+id);
 
-  if (!result.success)
-    pageNotFound(result.value);
-
-  const article = result.value;
+  if (error !== null)
+    pageNotFound(error);
 
   return (
     <Page title={article.title}>
@@ -25,7 +23,7 @@ async function getArticle(id: number): AsyncResult<WithId<Article>, string> {
   const state = history.state;
 
   if (state)
-    return { success: true, value: state };
+    return [state, null];
 
   return getArticleAPI(id);
 }

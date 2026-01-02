@@ -26,10 +26,13 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     /* path aliases */
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "$client/*": [
-        "./*"
+        "./src/*"
+      ],
+      "$common/*": [
+        "../common/*"
       ]
     },
     /* JSX */
