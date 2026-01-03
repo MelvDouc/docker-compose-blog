@@ -1,4 +1,4 @@
-import type { IArticle, ITag } from "$common/common-types.ts";
+import type { IArticle, ITag } from "$common/common-types.mts";
 
 export type WithId<T> = T & { id: number; };
 

@@ -1,5 +1,5 @@
 import type { Article, WithId } from "$client/types.ts";
-import type { FormErrorRecord, Result, SignupData } from "$common/common-types.ts";
+import type { FormErrorRecord, Result, SignupData } from "$common/common-types.mts";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

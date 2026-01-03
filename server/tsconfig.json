@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
+    /* Compilation */
     "target": "ES2022",
     "lib": [
       "ES2022"
     ],
-    "module": "Node18",
+    "skipLibCheck": true,
+    /* Modules */
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    /* Strictness */
     "strict": true,
-    "verbatimModuleSyntax": true,
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
+    /* TypeORM */
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
+    /* Path aliases */
     "baseUrl": ".",
     "paths": {
       "$server/*": [

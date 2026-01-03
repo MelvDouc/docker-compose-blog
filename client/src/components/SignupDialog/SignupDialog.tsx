@@ -2,7 +2,7 @@ import Button from "$client/components/Button/Button.tsx";
 import Dialog, { showDialog } from "$client/components/Dialog/Dialog.tsx";
 import Form from "$client/components/Form/Form.tsx";
 import { signUp } from "$client/utils/api.ts";
-import type { FormErrorRecord, SignupData } from "$common/common-types.ts";
+import type { FormErrorRecord, SignupData } from "$common/common-types.mts";
 import { obs } from "reactfree-jsx";
 
 export function showSignupDialog(): void {

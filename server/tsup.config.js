@@ -1,11 +1,12 @@
 import { defineConfig } from "tsup";
 
-export default defineConfig({
+export default defineConfig(({ watch }) => ({
   entry: ["src/index.ts", "src/core/data-source.ts"],
   outDir: "dist",
   platform: "node",
   target: "node18",
   format: "esm",
-  minify: true,
-  treeshake: true
-});
+  minify: !watch,
+  treeshake: true,
+  onSuccess: watch ? "npm start" : void 0
+}));

@@ -10,8 +10,8 @@
   "scripts": {
     "start": "node index.js",
     "build": "tsup",
-    "make:migration": "tsx typeorm migration:generate -- -d core/data-source.js",
-    "migrate": "tsx typeorm migration:run -- -d core/data-source.js",
+    "make:migration": "typeorm migration:generate -- -d core/data-source.js",
+    "migrate": "typeorm migration:run -- -d core/data-source.js",
     "dev:start": "tsx --watch-path=./src src/index.ts",
     "dev:typeorm": "tsx ./node_modules/.bin/typeorm",
     "dev:make:migration": "npm run dev:typeorm migration:generate -- -d src/core/data-source.ts",

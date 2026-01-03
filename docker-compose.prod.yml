@@ -15,8 +15,8 @@ services:
 
   server:
     build:
-      context: ./server
-      dockerfile: docker/Dockerfile.prod
+      context: .
+      dockerfile: server/docker/Dockerfile.prod
     env_file: env/.env.prod
     depends_on:
       database:
@@ -28,8 +28,8 @@ services:
 
   client:
     build:
-      context: ./client
-      dockerfile: config/Dockerfile.prod
+      context: .
+      dockerfile: client/config/Dockerfile.prod
     depends_on:
       - server
     restart: no

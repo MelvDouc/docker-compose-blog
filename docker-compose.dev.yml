@@ -33,6 +33,7 @@ services:
     container_name: blog_server
     volumes:
       - ./server:/app
+      - ./common:/common
 
   client:
     build:
@@ -46,6 +47,7 @@ services:
     container_name: blog_client
     volumes:
       - ./client:/app
+      - ./common:/common
 
 volumes:
   pg_data:
