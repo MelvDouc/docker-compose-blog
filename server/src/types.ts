@@ -8,11 +8,19 @@ declare global {
       readonly POSTGRES_USER: string;
       readonly NODE_ENV: "development" | "production";
       readonly HONO_PORT: string;
+      readonly JWT_KEY: string;
     }
   }
 }
 
 export type {
+  AsyncResult,
   Result,
-  AsyncResult
-} from "$common/common-types.js";
+  FormErrorRecord,
+  IArticle,
+  ITag,
+  IUser,
+  PublicUser,
+  LoginData,
+  SignupData
+} from "$common/common-types.mts";

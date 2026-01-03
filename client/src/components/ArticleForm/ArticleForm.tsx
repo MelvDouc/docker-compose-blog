@@ -1,27 +1,26 @@
 import Button from "$client/components/Button/Button.tsx";
+import Form from "$client/components/Form/Form.tsx";
 import type { Article } from "$client/types.ts";
-import cssClasses from "./ArticleForm.module.scss";
 
-export default function ArticleForm({ article, handleSubmit }: {
+export default function ArticleForm({ article, handleSubmit: _handleSubmit }: {
   article: Article | null;
   handleSubmit: (article: Article) => unknown;
 }) {
-  const onSubmit = (e: SubmitEvent) => {
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const data = new FormData(form);
+    const data = new FormData(e.target as HTMLFormElement);
     const article = {
       title: data.get("title") as string,
       content: data.get("content") as string,
       tags: [] // TODO: handle tags
     };
-    handleSubmit(article);
+    _handleSubmit(article);
   };
 
   return (
-    <form className={cssClasses.ArticleForm} on:submit={onSubmit}>
-      <section className={cssClasses.TitleRow}>
-        <label htmlFor="title">Title</label>
+    <Form handleSubmit={handleSubmit}>
+      <Form.Row>
+        <Form.Label htmlFor="title" text="Title" required />
         <input
           type="text"
           id="title"
@@ -31,14 +30,18 @@ export default function ArticleForm({ article, handleSubmit }: {
           autofocus
           required
         />
-      </section>
-      <section className={cssClasses.ContentRow}>
-        <label htmlFor="content">Content</label>
-        <textarea id="content" name="content" required>{article?.content}</textarea>
-      </section>
-      <section>
+      </Form.Row>
+      <Form.Row>
+        <Form.Label htmlFor="content" text="Content" required />
+        <textarea
+          id="content"
+          name="content"
+          required
+        >{article?.content}</textarea>
+      </Form.Row>
+      <Form.Row>
         <Button type="submit">Submit</Button>
-      </section>
-    </form>
-  );
+      </Form.Row>
+    </Form>
+  ) as HTMLFormElement;
 }

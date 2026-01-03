@@ -1,4 +1,5 @@
-import type { Article, Result, WithId } from "$client/types.ts";
+import type { Article, WithId } from "$client/types.ts";
+import type { FormErrorRecord, Result, SignupData } from "$common/common-types.ts";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -52,6 +53,19 @@ export const addArticle = (data: Article) => {
     fallback: () => [null, ["Error adding article."]]
   });
 };
+
+export const signUp = (data: SignupData) => {
+  return api<Result<true, FormErrorRecord<SignupData> & { $all?: string; }>>({
+    path: "/auth/sign-up",
+    method: "POST",
+    body: data,
+    fallback: () => [null, { $all: "" }]
+  });
+};
+
+// ===== ===== ===== ===== =====
+// TYPES
+// ===== ===== ===== ===== =====
 
 type Path = `/${string}`;
 type HttpVerb = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";

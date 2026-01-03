@@ -1,11 +1,16 @@
+import type { PublicUser } from "$server/types.js";
 import AppDataSource from "$server/core/data-source.js";
 import Article from "$server/entities/Article.js";
 import { validateArticle } from "$server/schemas/ArticleSchema.js";
+import authService from "$server/services/auth.service.js";
 import { Hono as Router } from "hono";
 
-// TODO: auth middleware
+// TODO: user-article relation
 
-export const articlesRouter = new Router();
+
+export const articlesRouter = new Router<{
+  Variables: { user: PublicUser; };
+}>();
 
 articlesRouter.use("/@/:id", async (ctx, next) => {
   const id = ctx.req.param("id");

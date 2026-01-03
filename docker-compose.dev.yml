@@ -14,9 +14,10 @@ services:
       - pg_data:/var/lib/postgresql
     healthcheck:
       test: "pg_isready --username=${POSTGRES_USER} -d ${POSTGRES_DB}"
-      interval: 10s
+      interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 3
+      start_period: 5s
 
   server:
     build:

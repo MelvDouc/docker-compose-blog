@@ -1,0 +1,51 @@
+.Form {
+  --control-border-color: rgb(172, 172, 172);
+  --control-bg-color: rgb(253, 253, 253);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
+
+.Row {
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.25em 0.5em;
+    border: 1px solid var(--control-border-color);
+    border-radius: 2px;
+    outline: none;
+    background-color: var(--control-bg-color);
+    font-family: inherit;
+    font-size: inherit;
+
+    &:focus {
+      --control-border-color: rgb(128, 128, 128);
+      --control-bg-color: rgb(255, 255, 235);
+    }
+  }
+
+  input {
+    height: 32px;
+  }
+
+  textarea {
+    resize: vertical;
+    flex-grow: 1;
+  }
+}
+
+.Label {
+  margin-bottom: 0.25em;
+
+  &.required::after {
+    content: "*";
+    color: red;
+  }
+}
+
+.Error {
+  list-style-position: inside;
+}

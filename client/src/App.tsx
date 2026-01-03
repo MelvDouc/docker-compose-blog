@@ -4,10 +4,12 @@ import ArticlePage from "$client/pages/ArticlePage.tsx";
 import HomePage from "$client/pages/HomePage.tsx";
 import { Route, Router } from "reactfree-jsx/extra/router";
 import cssClasses from "./App.module.scss";
+import Header from "$client/components/Header/Header.tsx";
 
 export default function App(): Node {
   return (
     <div className={cssClasses.App}>
+      <Header />
       <Sidebar />
       <main>
         <Router defaultComponent={(error) => (<p>{error.message ?? "!!!"}</p>)}>
@@ -16,6 +18,7 @@ export default function App(): Node {
           <Route path="/articles/new" component={AddArticlePage} />
         </Router>
       </main>
+      <Sidebar />
     </div>
   ) as Node;
 }

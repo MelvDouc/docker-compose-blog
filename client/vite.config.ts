@@ -9,7 +9,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "$client": join(root, "src")
+      "$client": join(root, "src"),
+      "$common": join(root, "..", "common")
     }
   },
   envDir: join(root, "config")
