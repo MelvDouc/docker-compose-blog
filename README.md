@@ -46,11 +46,11 @@ To load environment variables into *config* from a file not called `.env`, use t
 
 ### ports
 
-Syntax: `$host_port:$container_port`.
+Syntax: `($host_port:)$container_port`.
 
 - database:
-  - dev: 5175:**5432** — Any available host port is fine; Postgres defaults to 5432 in the container.
-  - prod: *blank*. The host port serves no purpose while requests to the db container with the protocol `postgresql://` will default to 5432 if the port is omitted.
+  - dev: 5432 — Postgres defaults to 5432 in the container.
+  - prod: *blank*. Requests to the db container with the protocol `postgresql://` will default to 5432 if the port is omitted.
 - server: Any available port on both the host and container can be safely used.
 - client:
   - dev: **5173**:5173 — Vite's default, configurable port. The container port matters little unless requests are somehow made from another service to the Vite server.

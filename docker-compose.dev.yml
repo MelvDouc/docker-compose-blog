@@ -13,7 +13,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql
     healthcheck:
-      test: "pg_isready --username=${POSTGRES_USER} -d ${POSTGRES_DB}"
+      test: "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
       interval: 5s
       timeout: 5s
       retries: 3

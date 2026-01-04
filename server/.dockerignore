@@ -1,7 +1,0 @@
-.env
-.env.*
-.vscode
-
-config
-dist
-node_modules

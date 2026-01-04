@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 
-export default defineConfig(({ watch }) => ({
+export default defineConfig({
   entry: ["src/index.ts", "src/core/data-source.ts"],
   outDir: "dist",
   platform: "node",
@@ -8,6 +8,5 @@ export default defineConfig(({ watch }) => ({
   format: "esm",
   minify: !watch,
   treeshake: true,
-  noExternal: ["@blog/common"],
-  onSuccess: watch ? "npm start" : void 0
-}));
+  noExternal: ["@blog/common"]
+});

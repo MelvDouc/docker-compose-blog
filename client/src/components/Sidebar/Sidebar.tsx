@@ -1,11 +1,11 @@
 import type { ComponentParentProps } from "reactfree-jsx";
 import cssClasses from "./Sidebar.module.scss";
 
-export default function Sidebar({ gridArea, children }: ComponentParentProps & {
-  gridArea: string;
+export default function Sidebar({ id, children }: ComponentParentProps & {
+  id: string;
 }) {
   return (
-    <aside className={cssClasses.Sidebar} style={{ gridArea }}>
+    <aside className={cssClasses.Sidebar} id={id}>
       {children}
     </aside>
   );

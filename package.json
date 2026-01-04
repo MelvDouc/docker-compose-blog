@@ -10,12 +10,14 @@
     "server"
   ],
   "scripts": {
+    "start": "npm run up -- --build",
     "compose": "docker compose -f docker-compose.prod.yml",
     "build": "npm run compose -- --env-file database/.env.prod build",
-    "up": "npm run compose -- --env-file database/.env.prod up --build",
+    "up": "npm run compose -- --env-file database/.env.prod up",
     "down": "npm run compose down",
+    "dev:start": "npm run dev:up -- --build",
     "dev:compose": "docker compose -f docker-compose.dev.yml",
-    "dev:up": "npm run dev:compose -- --env-file database/.env.dev up --build",
+    "dev:up": "npm run dev:compose -- --env-file database/.env.dev up",
     "dev:down": "npm run dev:compose down"
   },
   "repository": {

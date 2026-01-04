@@ -17,10 +17,11 @@ services:
     container_name: blog_server
     build:
       context: .
-      dockerfile: server/config/Dockerfile.prod
+      dockerfile: Dockerfile
+      target: server
     env_file:
-      - database/.env.dev
-      - server/config/.env.dev
+      - database/.env.prod
+      - server/config/.env.prod
     depends_on:
       database:
         condition: service_healthy
@@ -32,7 +33,8 @@ services:
     container_name: blog_client
     build:
       context: .
-      dockerfile: client/config/Dockerfile.prod
+      dockerfile: Dockerfile
+      target: client
     depends_on:
       - server
     restart: no
