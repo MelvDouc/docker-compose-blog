@@ -23,9 +23,6 @@
     "paths": {
       "$server/*": [
         "./src/*"
-      ],
-      "$common/*": [
-        "../common/*"
       ]
     }
   }

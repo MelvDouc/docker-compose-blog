@@ -12,15 +12,3 @@ declare global {
     }
   }
 }
-
-export type {
-  AsyncResult,
-  Result,
-  FormErrorRecord,
-  IArticle,
-  ITag,
-  IUser,
-  PublicUser,
-  LoginData,
-  SignupData
-} from "$common/common-types.mts";

@@ -11,7 +11,7 @@ console.log("Data source initialized.");
 serve({ fetch: app.fetch, port }, () => {
   console.log(
     process.env.NODE_ENV === "production"
-      ? `App running port ${port}`
+      ? `App running on port ${port}`
       : `App running at http://localhost:${port}`
   );
 });

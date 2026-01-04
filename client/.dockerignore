@@ -2,7 +2,7 @@
 .env.*
 .vscode
 
-Dockerfile.*
+**/Dockerfile.*
 
 dist
 node_modules

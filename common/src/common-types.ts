@@ -1,11 +1,13 @@
-import type { UserRole } from "./user-roles.mjs";
+import type { UserRole } from "./user-roles.ts";
 
 export type Result<Data, Err> = [data: Data, err: null] | [data: null, err: Err];
 export type AsyncResult<Data, Err> = Promise<Result<Data, Err>>;
 
-export type FormErrorRecord<T> = {
-  [K in keyof T]?: string[];
-};
+export type FormErrorRecord<T> =
+  & {
+    [K in keyof T]?: string[];
+  }
+  & { $all?: string; };
 
 export interface IUser {
   email: string;

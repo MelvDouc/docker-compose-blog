@@ -1,0 +1,5 @@
+FROM node:lts-alpine3.23
+
+WORKDIR /app
+
+CMD ["npm", "run", "-w", "@blog/server", "dev:start", "--no-update-notifier"]

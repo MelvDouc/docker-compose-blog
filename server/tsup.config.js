@@ -8,5 +8,6 @@ export default defineConfig(({ watch }) => ({
   format: "esm",
   minify: !watch,
   treeshake: true,
+  noExternal: ["@blog/common"],
   onSuccess: watch ? "npm start" : void 0
 }));

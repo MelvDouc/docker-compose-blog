@@ -1,4 +1,4 @@
-import type { IArticle, ITag } from "$common/common-types.mts";
+import type { IArticle, ITag } from "@blog/common";
 
 export type WithId<T> = T & { id: number; };
 

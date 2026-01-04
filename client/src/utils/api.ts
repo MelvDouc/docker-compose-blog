@@ -1,5 +1,10 @@
 import type { Article, WithId } from "$client/types.ts";
-import type { FormErrorRecord, Result, SignupData } from "$common/common-types.mts";
+import type {
+  FormErrorRecord,
+  Result,
+  LoginData,
+  SignupData
+} from "@blog/common";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -55,11 +60,20 @@ export const addArticle = (data: Article) => {
 };
 
 export const signUp = (data: SignupData) => {
-  return api<Result<true, FormErrorRecord<SignupData> & { $all?: string; }>>({
+  return api<Result<true, FormErrorRecord<SignupData>>>({
     path: "/auth/sign-up",
     method: "POST",
     body: data,
-    fallback: () => [null, { $all: "" }]
+    fallback: () => [null, { $all: "An error occurred." }]
+  });
+};
+
+export const logIn = (data: LoginData) => {
+  return api<Result<true, FormErrorRecord<LoginData>>>({
+    path: "/auth/log-in",
+    method: "POST",
+    body: data,
+    fallback: () => [null, { $all: "An error occurred." }]
   });
 };
 

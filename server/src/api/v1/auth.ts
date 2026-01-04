@@ -38,7 +38,7 @@ authRouter.post("/log-in", async (ctx) => {
   const publicUser = await authService.checkCredentials(data.username, data.password);
 
   if (!publicUser)
-    return ctx.json([null, { credentials: "Invalid credentials." }]);
+    return ctx.json([null, { $all: "Invalid credentials." }]);
 
   authService.logIn(ctx, publicUser);
   return ctx.json([publicUser, null]);

@@ -1,0 +1,33 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "private": true,
+  "exports": "./",
+  "description": "A sample full-stack application to practice using Docker Compose.",
+  "workspaces": [
+    "common",
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "compose": "docker compose -f docker-compose.prod.yml",
+    "build": "npm run compose -- --env-file database/.env.prod build",
+    "up": "npm run compose -- --env-file database/.env.prod up --build",
+    "down": "npm run compose down",
+    "dev:compose": "docker compose -f docker-compose.dev.yml",
+    "dev:up": "npm run dev:compose -- --env-file database/.env.dev up --build",
+    "dev:down": "npm run dev:compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MelvDouc/docker-compose-blog.git"
+  },
+  "keywords": [],
+  "author": "Melvin Doucet <melv.douc@gmail.com>",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MelvDouc/docker-compose-blog/issues"
+  },
+  "homepage": "https://github.com/MelvDouc/docker-compose-blog#readme"
+}

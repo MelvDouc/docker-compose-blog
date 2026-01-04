@@ -2,7 +2,7 @@ import ArticleElement from "$client/components/ArticleElement/ArticleElement.tsx
 import Page from "$client/components/Page/Page.tsx";
 import type { Article, WithId } from "$client/types.ts";
 import { getArticle as getArticleAPI } from "$client/utils/api.ts";
-import type { AsyncResult } from "$common/common-types.mjs";
+import type { AsyncResult } from "@blog/common";
 import { pageNotFound } from "reactfree-jsx/extra/router";
 
 export default async function ArticlePage({ id }: {

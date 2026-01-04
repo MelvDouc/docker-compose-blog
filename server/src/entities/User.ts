@@ -1,5 +1,4 @@
-import { UserRoles, type UserRole } from "$server/imports.js";
-import type { IUser } from "$server/types.js";
+import { UserRoles, type IUser, type UserRole } from "@blog/common";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity({ name: "users" })

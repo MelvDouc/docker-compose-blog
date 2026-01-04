@@ -1,0 +1,12 @@
+{
+  "name": "@blog/common",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "",
+  "exports": "./mod.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "Melvin Doucet <melv.douc@gmail.com>",
+  "license": "ISC"
+}

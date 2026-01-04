@@ -1,6 +1,6 @@
 {
-  "name": "server",
-  "version": "0.1.0",
+  "name": "@blog/server",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": "./index.js",
@@ -8,7 +8,7 @@
   "keywords": [],
   "authors": "Melvin Doucet <melv.douc@gmail.com>",
   "scripts": {
-    "start": "node index.js",
+    "start": "node dist/index.js",
     "build": "tsup",
     "make:migration": "typeorm migration:generate -- -d core/data-source.js",
     "migrate": "typeorm migration:run -- -d core/data-source.js",
@@ -18,6 +18,7 @@
     "dev:migrate": "npm run dev:typeorm migration:run -- -d src/core/data-source.ts"
   },
   "devDependencies": {
+    "@blog/common": "*",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.0.3",
