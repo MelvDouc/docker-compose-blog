@@ -15,6 +15,8 @@ export function showSignupDialog(): void {
 
 function SignupForm() {
   const handleSubmit = async (e: SubmitEvent): Promise<void> => {
+    e.preventDefault();
+
     formErrorObs.value = null;
     const formData = new FormData(e.target as HTMLFormElement);
     const signupData = {
@@ -26,9 +28,11 @@ function SignupForm() {
     const [_, formErrors] = await signUp(signupData);
 
     if (formErrors) {
-      e.preventDefault();
       formErrorObs.value = formErrors;
+      return;
     }
+
+    location.reload();
   };
 
   const formErrorObs = obs<FormErrorRecord<SignupData> | null>(null);
@@ -77,7 +81,7 @@ function UsernameInput({ id }: { id: string; }) {
       id={id}
       name={id}
       maxLength={20}
-      pattern="^[-\w]+$"
+      pattern="[\-a-zA-Z0-9]+"
       required
     />
   );
@@ -91,7 +95,6 @@ function PasswordInput({ id }: { id: string; }) {
       name={id}
       $init={(element) => element.minLength = 8}
       maxLength={50}
-      pattern="^[-\w]+$"
       required
     />
   );

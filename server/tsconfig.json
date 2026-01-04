@@ -7,8 +7,7 @@
     ],
     "skipLibCheck": true,
     /* Modules */
-    "moduleResolution": "bundler",
-    "moduleDetection": "force",
+    "module": "Node18",
     "allowImportingTsExtensions": true,
     "noEmit": true,
     /* Strictness */

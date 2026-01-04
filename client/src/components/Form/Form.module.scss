@@ -9,6 +9,13 @@
 }
 
 .Row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+
+  &.fillHeight {
+    flex-grow: 1;
+  }
 
   input,
   textarea {
@@ -38,8 +45,6 @@
 }
 
 .Label {
-  margin-bottom: 0.25em;
-
   &.required::after {
     content: "*";
     color: red;

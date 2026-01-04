@@ -1,6 +1,16 @@
 .Dialog {
+  width: min(100%, 400px);
   display: flex;
   flex-direction: column;
   gap: 1em;
-  padding: 1em;
+  padding: 0.5em;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border: 0;
+  border-radius: 5px;
+
+  &::backdrop {
+    background-color: rgba(4, 26, 55, 0.85);
+  }
 }

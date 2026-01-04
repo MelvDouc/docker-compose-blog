@@ -14,7 +14,7 @@ export default class Article implements IArticle {
   public content: string;
 
   @ManyToMany(() => Tag, (tag: Tag) => tag.articles, { cascade: true })
-  @JoinTable()
+  @JoinTable({ name: "article_tags" })
   public tags: Tag[];
 
   @Column("timestamp", { default: () => "CURRENT_TIMESTAMP" })

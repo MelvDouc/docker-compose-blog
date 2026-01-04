@@ -20,6 +20,11 @@ const checkCredentials = async (username: string, plainPassword: string): Promis
   return publicUser;
 };
 
+const hashPassword = async (password: string): Promise<string> => {
+  const salt = await bcrypt.genSalt();
+  return bcrypt.hash(password, salt);
+};
+
 const getLoggedUser = (ctx: Context): Result<PublicUser, string> => {
   if (loggedUser)
     return [loggedUser, null];
@@ -80,6 +85,7 @@ const isPublicUser = (arg: unknown): arg is PublicUser => {
 
 export default {
   requireAuth,
+  hashPassword,
   getLoggedUser,
   checkCredentials,
   logIn,

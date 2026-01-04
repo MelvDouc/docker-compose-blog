@@ -1,11 +1,32 @@
 .App {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "h h h"
+    "a m b"
+  ;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr var(--sidebar-width);
 
-  >main,
-  >aside {
-    height: 100%;
+  header {
+    grid-area: h;
+  }
+
+  main {
+    grid-area: m;
+  }
+
+  aside {
+    overflow: hidden;
+
+    &:nth-of-type(1) {
+      width: var(--sidebar-width);
+      transition: width 200ms ease-in-out;
+
+      &.collapsed {
+        width: 48px;
+        pointer-events: none;
+      }
+    }
   }
 }

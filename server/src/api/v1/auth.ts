@@ -9,6 +9,7 @@ export const authRouter = new Router();
 authRouter.post("/sign-up", async (ctx) => {
   const body: unknown = await ctx.req.json();
   const [data, formErrors] = await validateSignup(body);
+  console.log({ data, formErrors });
 
   if (formErrors)
     return ctx.json([null, formErrors]);
@@ -16,7 +17,7 @@ authRouter.post("/sign-up", async (ctx) => {
   const user = new User();
   user.email = data.email;
   user.username = data.username;
-  user.password = data.password1;
+  user.password = await authService.hashPassword(data.password1);
   user.role = "user";
   user.verified = false;
 

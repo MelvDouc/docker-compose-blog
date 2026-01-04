@@ -12,9 +12,16 @@ export default function Form({ method = "GET", handleSubmit, children }: Compone
   ) as HTMLFormElement;
 }
 
-Form.Row = ({ children }: ComponentParentProps) => {
+Form.Row = ({ fillHeight = false, children }: ComponentParentProps & {
+  fillHeight?: boolean;
+}) => {
+  const className = {
+    [cssClasses.Row]: true,
+    [cssClasses.fillHeight]: fillHeight,
+  };
+
   return (
-    <section className={cssClasses.Row}>{children}</section>
+    <section className={className}>{children}</section>
   );
 };
 

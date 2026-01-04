@@ -2,7 +2,7 @@ import { UserRoles, type UserRole } from "$server/imports.js";
 import type { IUser } from "$server/types.js";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity()
+@Entity({ name: "users" })
 export default class User implements IUser {
   @PrimaryColumn({ type: "text" })
   public email: string;

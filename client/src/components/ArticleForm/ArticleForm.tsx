@@ -31,7 +31,7 @@ export default function ArticleForm({ article, handleSubmit: _handleSubmit }: {
           required
         />
       </Form.Row>
-      <Form.Row>
+      <Form.Row fillHeight>
         <Form.Label htmlFor="content" text="Content" required />
         <textarea
           id="content"
@@ -40,7 +40,7 @@ export default function ArticleForm({ article, handleSubmit: _handleSubmit }: {
         >{article?.content}</textarea>
       </Form.Row>
       <Form.Row>
-        <Button type="submit">Submit</Button>
+        <div><Button type="submit">Submit</Button></div>
       </Form.Row>
     </Form>
   ) as HTMLFormElement;
