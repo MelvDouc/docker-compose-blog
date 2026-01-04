@@ -6,7 +6,7 @@ export default defineConfig({
   platform: "node",
   target: "node18",
   format: "esm",
-  minify: !watch,
+  minify: true,
   treeshake: true,
   noExternal: ["@blog/common"]
 });

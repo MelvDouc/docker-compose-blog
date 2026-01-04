@@ -1,5 +1,12 @@
-FROM node:lts-alpine3.23
+FROM node:22-slim AS base
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+
+FROM base
 
 WORKDIR /app
 
-CMD ["npm", "run", "-w", "@blog/server", "dev:start", "--no-update-notifier"]
+CMD ["pnpm", "--filter", "server", "run", "dev:start"]

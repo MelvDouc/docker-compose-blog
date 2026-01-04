@@ -4,21 +4,14 @@
   "private": true,
   "exports": "./",
   "description": "A sample full-stack application to practice using Docker Compose.",
-  "workspaces": [
-    "common",
-    "client",
-    "server"
-  ],
   "scripts": {
-    "start": "npm run up -- --build",
-    "compose": "docker compose -f docker-compose.prod.yml",
-    "build": "npm run compose -- --env-file database/.env.prod build",
-    "up": "npm run compose -- --env-file database/.env.prod up",
-    "down": "npm run compose down",
-    "dev:start": "npm run dev:up -- --build",
-    "dev:compose": "docker compose -f docker-compose.dev.yml",
-    "dev:up": "npm run dev:compose -- --env-file database/.env.dev up",
-    "dev:down": "npm run dev:compose down"
+    "start": "docker compose -f docker-compose.prod.yml --env-file database/.env.prod up --build",
+    "build": "docker compose -f docker-compose.prod.yml --env-file database/.env.prod build",
+    "up": "docker compose -f docker-compose.prod.yml --env-file database/.env.prod up",
+    "down": "docker compose -f docker-compose.prod.yml down",
+    "dev:start": "pnpm run dev:up --build",
+    "dev:up": "docker compose -f docker-compose.dev.yml --env-file database/.env.dev up",
+    "dev:down": "docker compose -f docker-compose.dev.yml down"
   },
   "repository": {
     "type": "git",

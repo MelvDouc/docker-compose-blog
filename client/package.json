@@ -1,5 +1,5 @@
 {
-  "name": "@blog/client",
+  "name": "client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@blog/common": "workspace:common@*",
     "@types/node": "^25.0.3",
     "reactfree-jsx": "^1.12.1",
     "sass": "^1.97.1",
     "typescript": "~5.9.3",
-    "vite": "^7.1.7",
-    "@blog/common": "*"
+    "vite": "^7.1.7"
   }
 }

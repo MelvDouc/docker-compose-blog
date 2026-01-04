@@ -1,0 +1,7 @@
+packages:
+  - client
+  - common
+  - server
+syncInjectedDepsAfterScripts:
+  - build
+injectWorkspacePackages: true
