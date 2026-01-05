@@ -1,20 +1,60 @@
 import Button from "$client/components/Button/Button.tsx";
 import Dialog, { showDialog } from "$client/components/Dialog/Dialog.tsx";
 import Form from "$client/components/Form/Form.tsx";
+import PasswordInput from "$client/components/form-elements/PasswordInput.tsx";
+import UsernameInput from "$client/components/form-elements/UsernameInput";
 import { logIn } from "$client/utils/api.ts";
 import type { FormErrorRecord, LoginData } from "@blog/common";
-import { obs } from "reactfree-jsx";
+import { type Obs, obs } from "reactfree-jsx";
+import { TypedEventEmitter } from "reactfree-jsx/extra";
 
 export function showLoginDialog(): void {
+  const emitter = new TypedEventEmitter<{ close: []; }>();
+  const [onClose, emitClose] = emitter.createHandlers("close");
+
   showDialog(
-    <Dialog>
-      <LoginForm />
+    <Dialog onClose={onClose}>
+      <LoginForm emitClose={emitClose} />
     </Dialog> as HTMLDialogElement
   );
 }
 
-function LoginForm() {
-  const handleSubmit = async (e: SubmitEvent): Promise<void> => {
+function LoginForm({ emitClose }: {
+  emitClose: VoidFunction;
+}) {
+  const formErrorObs = obs<LoginFormErrors>(null);
+  const handleSubmit = createSubmitHandler(formErrorObs);
+
+  return (
+    <Form handleSubmit={handleSubmit}>
+      {formErrorObs.value?.$all && (<div>{formErrorObs.value.$all}</div>)}
+      <Form.Row centered>
+        <h2>Log in</h2>
+      </Form.Row>
+      <Form.Row>
+        <Form.Label htmlFor="username" text="Username" required />
+        <UsernameInput id="username" />
+        {formErrorObs.value?.username && (
+          <Form.Error errors={formErrorObs.value.username} />
+        )}
+      </Form.Row>
+      <Form.Row>
+        <Form.Label htmlFor="password" text="Password" required />
+        <PasswordInput id="password" />
+        {formErrorObs.value?.password && (
+          <Form.Error errors={formErrorObs.value.password} />
+        )}
+      </Form.Row>
+      <Form.Row inline centered>
+        <Button type="submit">Log in</Button>
+        <Button handleClick={emitClose} color="danger">Cancel</Button>
+      </Form.Row>
+    </Form>
+  );
+}
+
+function createSubmitHandler(formErrorObs: Obs<LoginFormErrors>) {
+  return async (e: SubmitEvent): Promise<void> => {
     e.preventDefault();
 
     formErrorObs.value = null;
@@ -32,52 +72,6 @@ function LoginForm() {
 
     location.reload();
   };
-
-  const formErrorObs = obs<FormErrorRecord<LoginData> | null>(null);
-
-  return (
-    <Form handleSubmit={handleSubmit}>
-      {formErrorObs.value?.$all && (<div>{formErrorObs.value.$all}</div>)}
-      <Form.Row>
-        <Form.Label htmlFor="username" text="Username" required />
-        <UsernameInput id="username" />
-        {formErrorObs.value?.username && (
-          <Form.Error errors={formErrorObs.value.username} />
-        )}
-      </Form.Row>
-      <Form.Row>
-        <Form.Label htmlFor="password" text="Password" required />
-        <PasswordInput id="password" />
-        {formErrorObs.value?.password && (
-          <Form.Error errors={formErrorObs.value.password} />
-        )}
-      </Form.Row>
-      <Form.Row>
-        <Button type="submit">Log in</Button>
-      </Form.Row>
-    </Form>
-  );
 }
 
-function UsernameInput({ id }: { id: string; }) {
-  return (
-    <input
-      type="text"
-      id={id}
-      name={id}
-      maxLength={20}
-      required
-    />
-  );
-}
-
-function PasswordInput({ id }: { id: string; }) {
-  return (
-    <input
-      type="password"
-      id={id}
-      name={id}
-      required
-    />
-  );
-}
+type LoginFormErrors = FormErrorRecord<LoginData> | null;

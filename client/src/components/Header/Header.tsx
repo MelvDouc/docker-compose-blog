@@ -1,5 +1,7 @@
 import Button from "$client/components/Button/Button.tsx";
+import { showLoginDialog } from "$client/components/LoginDialog/LoginDialog.tsx";
 import { showSignupDialog } from "$client/components/SignupDialog/SignupDialog.tsx";
+
 import cssClasses from "./Header.module.scss";
 
 export default function Header() {
@@ -11,7 +13,7 @@ export default function Header() {
       </section>
       <section className={cssClasses.Right}>
         <Button color="white" handleClick={showSignupDialog}>Sign up</Button>
-        <Button handleClick={() => { }}>Log in</Button>
+        <Button handleClick={showLoginDialog}>Log in</Button>
       </section>
     </header>
   );

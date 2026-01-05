@@ -1,17 +1,16 @@
 import type { ComponentParentProps } from "reactfree-jsx";
 import cssClasses from "./Dialog.module.scss";
 
-export default function Dialog({ children }: ComponentParentProps) {
-  const onCancel = (e: Event) => {
-    (e.target as HTMLDialogElement).close();
-  };
-
-  const onClose = (e: Event) => {
-    (e.target as HTMLDialogElement).remove();
+export default function Dialog({ onClose, children }: ComponentParentProps & {
+  onClose?: (subscription: () => unknown) => void;
+}) {
+  const $init = (element: HTMLDialogElement) => {
+    onClose && onClose(() => element.close());
+    element.onclose = () => element.remove();
   };
 
   return (
-    <dialog className={cssClasses.Dialog} on:cancel={onCancel} on:close={onClose}>
+    <dialog className={cssClasses.Dialog} $init={$init}>
       {children}
     </dialog>
   );

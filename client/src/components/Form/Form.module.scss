@@ -17,6 +17,15 @@
     flex-grow: 1;
   }
 
+  &.inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &.centered {
+    justify-content: center;
+  }
+
   input,
   textarea {
     width: 100%;

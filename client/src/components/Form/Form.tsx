@@ -12,12 +12,16 @@ export default function Form({ method = "GET", handleSubmit, children }: Compone
   ) as HTMLFormElement;
 }
 
-Form.Row = ({ fillHeight = false, children }: ComponentParentProps & {
+Form.Row = ({ fillHeight, inline, centered, children }: ComponentParentProps & {
   fillHeight?: boolean;
+  inline?: boolean;
+  centered?: boolean;
 }) => {
   const className = {
     [cssClasses.Row]: true,
-    [cssClasses.fillHeight]: fillHeight,
+    [cssClasses.fillHeight]: !!fillHeight,
+    [cssClasses.inline]: !!inline,
+    [cssClasses.centered]: !!centered,
   };
 
   return (
