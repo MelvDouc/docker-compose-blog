@@ -19,7 +19,7 @@ services:
     container_name: blog_server
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
       target: server
     env_file:
       - database/.env.prod
@@ -36,7 +36,7 @@ services:
     container_name: blog_client
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
       target: client
     depends_on:
       - server
