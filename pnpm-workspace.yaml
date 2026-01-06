@@ -1,7 +1,12 @@
 packages:
-  - client
-  - common
-  - server
+  - packages/*
+
+injectWorkspacePackages: true
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - esbuild
+
 syncInjectedDepsAfterScripts:
   - build
-injectWorkspacePackages: true

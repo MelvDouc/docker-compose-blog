@@ -28,7 +28,7 @@ services:
       target: server
     env_file:
       - database/.env.dev
-      - server/config/.env.dev
+      - packages/server/.env.dev
     depends_on:
       database:
         condition: service_healthy

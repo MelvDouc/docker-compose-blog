@@ -8,7 +8,7 @@
     "start": "pnpm compose up --build",
     "build": "pnpm compose build",
     "stop": "pnpm compose down",
-    "compose": "docker compose -f docker-compose.prod.yml --env-file database/.env.prod",
+    "compose": "docker compose --env-file database/.env",
     "dev:start": "pnpm dev:compose up --build",
     "dev:build": "pnpm dev:compose build",
     "dev:stop": "pnpm dev:compose down",

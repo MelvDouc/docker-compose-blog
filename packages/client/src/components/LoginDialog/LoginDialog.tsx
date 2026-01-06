@@ -4,6 +4,7 @@ import Form from "$client/components/Form/Form.tsx";
 import PasswordInput from "$client/components/form-elements/PasswordInput.tsx";
 import UsernameInput from "$client/components/form-elements/UsernameInput";
 import { logIn } from "$client/utils/api.ts";
+import { loggedUserObs } from "$client/utils/auth.ts";
 import type { FormErrorRecord, LoginData } from "@blog/common";
 import { type Obs, obs } from "reactfree-jsx";
 import { TypedEventEmitter } from "reactfree-jsx/extra";
@@ -23,7 +24,7 @@ function LoginForm({ emitClose }: {
   emitClose: VoidFunction;
 }) {
   const formErrorObs = obs<LoginFormErrors>(null);
-  const handleSubmit = createSubmitHandler(formErrorObs);
+  const handleSubmit = createSubmitHandler(formErrorObs, emitClose);
 
   return (
     <Form handleSubmit={handleSubmit}>
@@ -53,7 +54,7 @@ function LoginForm({ emitClose }: {
   );
 }
 
-function createSubmitHandler(formErrorObs: Obs<LoginFormErrors>) {
+function createSubmitHandler(formErrorObs: Obs<LoginFormErrors>, emitClose: VoidFunction) {
   return async (e: SubmitEvent): Promise<void> => {
     e.preventDefault();
 
@@ -63,14 +64,15 @@ function createSubmitHandler(formErrorObs: Obs<LoginFormErrors>) {
       username: formData.get("username") as string,
       password: formData.get("password") as string
     };
-    const [_, formErrors] = await logIn(signupData);
+    const [user, formErrors] = await logIn(signupData);
 
     if (formErrors) {
       formErrorObs.value = formErrors;
       return;
     }
 
-    location.reload();
+    emitClose();
+    loggedUserObs.value = user;
   };
 }
 

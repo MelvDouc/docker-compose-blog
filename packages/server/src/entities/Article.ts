@@ -1,6 +1,7 @@
-import type { IArticle } from "$server/types.js";
 import Tag from "$server/entities/Tag.js";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import User from "$server/entities/User.ts";
+import type { IArticle } from "@blog/common";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export default class Article implements IArticle {
@@ -16,6 +17,9 @@ export default class Article implements IArticle {
   @ManyToMany(() => Tag, (tag: Tag) => tag.articles, { cascade: true })
   @JoinTable({ name: "article_tags" })
   public tags: Tag[];
+
+  @ManyToOne(() => User, (user) => user.articles, { onDelete: "SET NULL" })
+  public user: User | null;
 
   @Column("timestamp", { default: () => "CURRENT_TIMESTAMP" })
   public createdAt: Date;

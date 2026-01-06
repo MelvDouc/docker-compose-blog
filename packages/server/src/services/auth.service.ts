@@ -1,6 +1,6 @@
 import AppDataSource from "$server/core/data-source.js";
 import User from "$server/entities/User.js";
-import type { PublicUser, Result } from "$server/types.js";
+import type { PublicUser, Result } from "@blog/common";
 import bcrypt from "bcryptjs";
 import type { Context, Next } from "hono";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";

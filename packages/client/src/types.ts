@@ -1,4 +1,7 @@
-import type { IArticle, ITag } from "@blog/common";
+import type {
+  IArticle,
+  ITag
+} from "@blog/common";
 
 export type WithId<T> = T & { id: number; };
 

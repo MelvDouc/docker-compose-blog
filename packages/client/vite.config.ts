@@ -5,7 +5,7 @@ const root = import.meta.dirname;
 
 export default defineConfig({
   server: {
-    host: true, // allows HTTP requests to server,
+    host: true, // allows HTTP requests to server
     allowedHosts: ["host.local"]
   },
   resolve: {

@@ -3,7 +3,8 @@ import type {
   FormErrorRecord,
   Result,
   LoginData,
-  SignupData
+  SignupData,
+  PublicUser
 } from "@blog/common";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -69,11 +70,27 @@ export const signUp = (data: SignupData) => {
 };
 
 export const logIn = (data: LoginData) => {
-  return api<Result<true, FormErrorRecord<LoginData>>>({
+  return api<Result<PublicUser, FormErrorRecord<LoginData>>>({
     path: "/auth/log-in",
     method: "POST",
     body: data,
     fallback: () => [null, { $all: "An error occurred." }]
+  });
+};
+
+export const logOut = () => {
+  return api<Result<true, string>>({
+    path: "/auth/log-out",
+    method: "POST",
+    fallback: () => [null, "An error occurred."]
+  });
+};
+
+export const getLoggedUser = () => {
+  return api<Result<PublicUser, string>>({
+    path: "/auth/logged-user",
+    method: "GET",
+    fallback: () => [null, ""]
   });
 };
 
@@ -84,7 +101,7 @@ export const logIn = (data: LoginData) => {
 type Path = `/${string}`;
 type HttpVerb = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-type BodilessApiParams<T> = {
+type WithoutBodyApiParams<T> = {
   method: "GET" | "DELETE";
   path: Path;
   fallback: (error: unknown) => T;
@@ -94,7 +111,7 @@ type WithBodyApiParams<T> = {
   method: "POST" | "PUT" | "PATCH";
   path: Path;
   fallback: (error: unknown) => T;
-  body: unknown;
+  body?: unknown;
 };
 
-type ApiParams<T> = BodilessApiParams<T> | WithBodyApiParams<T>;
+type ApiParams<T> = WithoutBodyApiParams<T> | WithBodyApiParams<T>;

@@ -1,12 +1,8 @@
-import type { PublicUser } from "$server/types.js";
+import type { PublicUser } from "@blog/common";
 import AppDataSource from "$server/core/data-source.js";
 import Article from "$server/entities/Article.js";
-import { validateArticle } from "$server/schemas/ArticleSchema.js";
-import authService from "$server/services/auth.service.js";
+import { validateArticle } from "$server/schemas/article.schema.ts";
 import { Hono as Router } from "hono";
-
-// TODO: user-article relation
-
 
 export const articlesRouter = new Router<{
   Variables: { user: PublicUser; };
@@ -50,6 +46,7 @@ articlesRouter.get("/@/:id", async (ctx) => {
   if (!article)
     return ctx.json([null, "Article not found."]);
 
+  // FIXME
   article.tags ??= [];
   return ctx.json([article, null]);
 });

@@ -6,13 +6,13 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "tsup --config config/tsup.config.js",
+    "build": "tsup",
     "make:migration": "typeorm migration:generate -d core/data-source.js",
     "migrate": "typeorm migration:run -d core/data-source.js",
     "dev:start": "tsx --watch-path=./src src/index.ts",
     "dev:typeorm": "tsx ./node_modules/.bin/typeorm",
-    "dev:make:migration": "pnpm run dev:typeorm migration:generate -- -d src/core/data-source.ts",
-    "dev:migrate": "pnpm run dev:typeorm migration:run -- -d src/core/data-source.ts"
+    "dev:make:migration": "pnpm dev:typeorm migration:generate -- -d src/core/data-source.ts",
+    "dev:migrate": "pnpm dev:typeorm migration:run -- -d src/core/data-source.ts"
   },
   "devDependencies": {
     "@blog/common": "workspace:common@*",

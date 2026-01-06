@@ -1,5 +1,6 @@
+import Article from "$server/entities/Article.ts";
 import { UserRoles, type IUser, type UserRole } from "@blog/common";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
 @Entity({ name: "users" })
 export default class User implements IUser {
@@ -14,6 +15,9 @@ export default class User implements IUser {
 
   @Column("enum", { enum: UserRoles, default: "user" })
   public role: UserRole;
+
+  @OneToMany(() => Article, (article) => article.user)
+  public articles: Article[];
 
   @Column("bool", { default: false })
   public verified: boolean;

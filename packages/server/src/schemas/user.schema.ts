@@ -4,7 +4,7 @@ import type {
   FormErrorRecord,
   LoginData,
   SignupData
-} from "$server/types.js";
+} from "@blog/common";
 import AppDataSource from "$server/core/data-source.js";
 import User from "$server/entities/User.js";
 import { z } from "zod";
@@ -35,12 +35,12 @@ const SignupSchema = z
     password1: z
       .string()
       .min(8, { error: Errors.PasswordTooShort, abort: true })
-      .max(50, { error: Errors.PasswordTooLong }),
+      .max(50, { error: Errors.PasswordTooLong, abort: true }),
     password2: z.string()
   })
   .refine(
     ({ password1, password2 }) => password1 === password2,
-    { error: Errors.PasswordMismatch }
+    { error: Errors.PasswordMismatch, path: ["password2"] }
   );
 
 const LoginSchema = z.object({
