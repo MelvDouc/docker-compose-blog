@@ -5,14 +5,14 @@
   "exports": "./",
   "description": "A sample full-stack application to practice using Docker Compose.",
   "scripts": {
-    "start": "pnpm compose --env-file database/.env.prod up --build",
-    "build": "pnpm compose --env-file database/.env.prod build",
+    "start": "pnpm compose up --build",
+    "build": "pnpm compose build",
     "stop": "pnpm compose down",
-    "compose": "docker compose -f docker-compose.prod.yml",
-    "dev:start": "pnpm dev:compose --env-file database/.env.dev up --build",
-    "dev:build": "pnpm dev:compose --env-file database/.env.dev build",
+    "compose": "docker compose -f docker-compose.prod.yml --env-file database/.env.prod",
+    "dev:start": "pnpm dev:compose up --build",
+    "dev:build": "pnpm dev:compose build",
     "dev:stop": "pnpm dev:compose down",
-    "dev:compose": "docker compose -f docker-compose.dev.yml"
+    "dev:compose": "docker compose -f docker-compose.dev.yml --env-file database/.env.dev"
   },
   "repository": {
     "type": "git",
